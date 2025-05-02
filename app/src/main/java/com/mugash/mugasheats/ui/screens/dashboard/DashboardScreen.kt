@@ -24,6 +24,7 @@ import com.mugash.mugasheats.navigation.ROUT_ABOUT
 import com.mugash.mugasheats.navigation.ROUT_HOME
 import com.mugash.mugasheats.navigation.ROUT_ITEM
 import com.mugash.mugasheats.navigation.ROUT_MORE
+import com.mugash.mugasheats.navigation.ROUT_RECIPE
 import com.mugash.mugasheats.navigation.ROUT_RESTAURANTMENU
 
 @Composable
@@ -89,8 +90,8 @@ fun DashboardScreen(navController: NavController) {
             modifier = Modifier.fillMaxWidth()
         ) {
             DashboardCard(
-                iconRes = R.drawable.abouticon,
-                label = "About Us",
+                iconRes = R.drawable.recipeicon,
+                label = "Recipes",
                 onClick = { navController.navigate(ROUT_RECIPE) }
             )
 
