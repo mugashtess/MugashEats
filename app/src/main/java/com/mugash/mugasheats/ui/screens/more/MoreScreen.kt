@@ -15,10 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
@@ -51,67 +49,63 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.mugash.mugasheats.R
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MoreScreen(navController: NavController){
-    Column (
+fun MoreScreen(navController: NavController) {
+    Column(
         modifier = Modifier.fillMaxSize()
-
-    ){
+    ) {
         val mContext = LocalContext.current
 
-        //TopAppBar
-
+        // TopAppBar
         TopAppBar(
-            title = { Text(text = "More Product") },
+            title = { Text(text = "More Dishes") },
             colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = Color.Yellow,
+                containerColor = Color(0xFFFF5722), // Warm Orange for food app
                 titleContentColor = Color.White,
                 actionIconContentColor = Color.White,
-                navigationIconContentColor =Color.White
+                navigationIconContentColor = Color.White
             ),
             navigationIcon = {
-                IconButton(onClick = {}) {
+                IconButton(onClick = { /* Handle menu click */ }) {
                     Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
                 }
             },
-
             actions = {
-                IconButton(onClick = {}) {
+                IconButton(onClick = { /* Cart Click */ }) {
                     Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = "")
                 }
-
-
-
             }
         )
-        //End of TopAppBar
+        // End of TopAppBar
+
         Spacer(modifier = Modifier.height(20.dp))
 
-        //SearchBar
+        // SearchBar
         var search by remember { mutableStateOf("") }
         OutlinedTextField(
             value = search,
-            onValueChange = { search = it},
-            modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp),
+            onValueChange = { search = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp),
             leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "") },
-            placeholder = { Text(text = "Search More Products ...") }
+            placeholder = { Text(text = "Search Dishes...") }
         )
-
-
-        //End Of SearchBar
+        // End Of SearchBar
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Box
-        Box (
-            modifier = Modifier.fillMaxWidth().height(250.dp),
+        // Banner Box
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(250.dp),
             contentAlignment = Alignment.Center
-        ){
+        ) {
             Image(
-                painter = painterResource(R.drawable.moreicon),
-                contentDescription = "home",
+                painter = painterResource(R.drawable.restaurant_banner), // Make sure you have a restaurant banner image
+                contentDescription = "Restaurant",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.FillWidth
             )
@@ -119,193 +113,90 @@ fun MoreScreen(navController: NavController){
                 imageVector = Icons.Default.Favorite,
                 contentDescription = "",
                 tint = Color.White,
-                modifier = Modifier.align(alignment = Alignment.TopEnd).padding(20.dp)
+                modifier = Modifier
+                    .align(alignment = Alignment.TopEnd)
+                    .padding(20.dp)
             )
             Text(
-                text = "Find the best Products",
-                fontSize = 30.sp,
+                text = "Discover Tasty Meals!",
+                fontSize = 26.sp,
                 color = Color.White,
                 fontWeight = FontWeight.ExtraBold
             )
-
         }
+        // End of Banner Box
 
-        // End of Box
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = "Popular Watch Products",
-            fontSize = 30.sp,
+            text = "Popular Dishes",
+            fontSize = 24.sp,
             textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
             modifier = Modifier.fillMaxWidth()
-
         )
         Spacer(modifier = Modifier.height(20.dp))
 
-        //Row
-
-        Row (
-            modifier = Modifier.padding(start = 20.dp).horizontalScroll(rememberScrollState()),
-
-            ){
-            // Column
-
-            Column (horizontalAlignment = Alignment.CenterHorizontally
-            ){
-                Image(
-                    painter = painterResource(R.drawable.splash),
-                    contentDescription = "home",
-                    modifier = Modifier
-                        .size(150.dp)
-                        .clip(shape = RoundedCornerShape(20.dp)),
-                    contentScale = ContentScale.FillBounds
-
-                )
-                Text(text = "Watch",
-                    fontSize = 15.sp
-                )
-                Text(text = "Ksh,6500",
-                    fontSize = 15.sp
-                )
-                Button(onClick = {
-                    val simToolKitLaunchIntent =
-                        mContext.packageManager.getLaunchIntentForPackage("com.android.stk")
-                    simToolKitLaunchIntent?.let { mContext.startActivity(it) }
-
-                },
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Cyan)
-                ) {
-                    Text(text = "Pay")
-                }
-
+        // Popular Dishes Row
+        Row(
+            modifier = Modifier
+                .padding(start = 20.dp)
+                .horizontalScroll(rememberScrollState())
+        ) {
+            DishItem(
+                name = "Grilled Chicken",
+                price = "Ksh.950",
+                imageRes = R.drawable.grilled_chicken
+            ) {
+                // Simulate Payment action (use actual order flow in real app)
+                val simToolKitLaunchIntent =
+                    mContext.packageManager.getLaunchIntentForPackage("com.android.stk")
+                simToolKitLaunchIntent?.let { mContext.startActivity(it) }
             }
 
-            // End of Column
             Spacer(modifier = Modifier.width(10.dp))
-            // Column
 
-            Column (horizontalAlignment = Alignment.CenterHorizontally
-            ){
-                Image(
-                    painter = painterResource(R.drawable.splash),
-                    contentDescription = "home",
-                    modifier = Modifier
-                        .size(150.dp)
-                        .clip(shape = RoundedCornerShape(20.dp)),
-                    contentScale = ContentScale.FillBounds
-
-                )
-                Text(text = "Watch",
-                    fontSize = 15.sp
-                )
-                Text(text = "Ksh,8500",
-                    fontSize = 15.sp
-                )
-                Button(onClick = {
-                    val simToolKitLaunchIntent =
-                        mContext.packageManager.getLaunchIntentForPackage("com.android.stk")
-                    simToolKitLaunchIntent?.let { mContext.startActivity(it) }
-
-                },
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Cyan)
-                ) {
-                    Text(text = "Pay")
-                }
-
+            DishItem(
+                name = "Veggie Pizza",
+                price = "Ksh.1200",
+                imageRes = R.drawable.veggie__pizza
+            ) {
+                val simToolKitLaunchIntent =
+                    mContext.packageManager.getLaunchIntentForPackage("com.android.stk")
+                simToolKitLaunchIntent?.let { mContext.startActivity(it) }
             }
-
-            // End of Column
-            Spacer(modifier = Modifier.width(10.dp))
-            // Column
-
-            Column (horizontalAlignment = Alignment.CenterHorizontally
-            ){
-                Image(
-                    painter = painterResource(R.drawable.splash),
-                    contentDescription = "home",
-                    modifier = Modifier
-                        .size(150.dp)
-                        .clip(shape = RoundedCornerShape(20.dp)),
-                    contentScale = ContentScale.FillBounds
-
-                )
-                Text(text = "Watch",
-                    fontSize = 15.sp
-                )
-                Text(text = "Ksh,5500",
-                    fontSize = 15.sp
-                )
-                Button(onClick = {
-                    val simToolKitLaunchIntent =
-                        mContext.packageManager.getLaunchIntentForPackage("com.android.stk")
-                    simToolKitLaunchIntent?.let { mContext.startActivity(it) }
-
-                },
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Cyan)
-                ) {
-                    Text(text = "Pay")
-                }
-
-            }
-
-            // End of Column
-            Spacer(modifier = Modifier.width(10.dp))
-            Spacer(modifier = Modifier.width(10.dp))
-            // Column
-
-            Column (horizontalAlignment = Alignment.CenterHorizontally
-            ){
-                Image(
-                    painter = painterResource(R.drawable.splash),
-                    contentDescription = "home",
-                    modifier = Modifier
-                        .size(150.dp)
-                        .clip(shape = RoundedCornerShape(20.dp)),
-                    contentScale = ContentScale.FillBounds
-
-                )
-                Text(text = "Watch",
-                    fontSize = 15.sp
-                )
-                Text(text = "Ksh,7500",
-                    fontSize = 15.sp
-                )
-                Button(onClick = {
-                    val simToolKitLaunchIntent =
-                        mContext.packageManager.getLaunchIntentForPackage("com.android.stk")
-                    simToolKitLaunchIntent?.let { mContext.startActivity(it) }
-
-                },
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Cyan)
-                ) {
-                    Text(text = "Pay")
-                }
-
-            }
-
-            // End of Column
-
-
-
         }
-
         // End of Row
-
-
-
-
     }
+}
 
-
-
+@Composable
+fun DishItem(name: String, price: String, imageRes: Int, onPayClick: () -> Unit) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            painter = painterResource(imageRes),
+            contentDescription = name,
+            modifier = Modifier
+                .size(150.dp)
+                .clip(shape = RoundedCornerShape(20.dp)),
+            contentScale = ContentScale.Crop
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = name, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+        Text(text = price, fontSize = 15.sp)
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(
+            onClick = onPayClick,
+            shape = RoundedCornerShape(10.dp),
+            colors = ButtonDefaults.buttonColors(Color(0xFFFF9800)) // Orange for food button
+        ) {
+            Text(text = "Order Now", color = Color.White)
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun MoreScreenPreview(){
-    MoreScreen(navController= rememberNavController())
+fun MoreScreenPreview() {
+    MoreScreen(navController = rememberNavController())
 }

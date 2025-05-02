@@ -23,6 +23,8 @@ import com.mugash.mugasheats.R
 import com.mugash.mugasheats.navigation.ROUT_ABOUT
 import com.mugash.mugasheats.navigation.ROUT_HOME
 import com.mugash.mugasheats.navigation.ROUT_ITEM
+import com.mugash.mugasheats.navigation.ROUT_MORE
+import com.mugash.mugasheats.navigation.ROUT_RESTAURANTMENU
 
 @Composable
 fun DashboardScreen(navController: NavController) {
@@ -69,7 +71,7 @@ fun DashboardScreen(navController: NavController) {
             DashboardCard(
                 iconRes = R.drawable.itemicon,
                 label = "Menu",
-                onClick = { navController.navigate(ROUT_ITEM) }
+                onClick = { navController.navigate(ROUT_RESTAURANTMENU) }
             )
 
             DashboardCard(
@@ -89,7 +91,7 @@ fun DashboardScreen(navController: NavController) {
             DashboardCard(
                 iconRes = R.drawable.abouticon,
                 label = "About Us",
-                onClick = { navController.navigate(ROUT_ABOUT) }
+                onClick = { navController.navigate(ROUT_RECIPE) }
             )
 
             DashboardCard(
@@ -113,7 +115,7 @@ fun DashboardCard(
             .height(180.dp)
             .clickable(onClick = onClick),
         elevation = CardDefaults.cardElevation(6.dp),
-        colors = CardDefaults.cardColors(containerColor = newPurple),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFB71C1C)),
         shape = RoundedCornerShape(20.dp)
     ) {
         Column(

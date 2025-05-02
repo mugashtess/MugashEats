@@ -1,5 +1,6 @@
 package com.mugash.mugasheats.ui.screens.start
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -7,6 +8,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,10 +24,23 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.mugash.mugasheats.R
 import com.mugash.mugasheats.navigation.ROUT_HOME
-import com.mugash.mugasheats.navigation.ROUT_ITEM
+import com.mugash.mugasheats.navigation.ROUT_REGISTER
+import com.mugash.mugasheats.navigation.ROUT_SPLASH
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun StartScreen(navController: NavController) {
+    val coroutine = rememberCoroutineScope()
+    coroutine.launch {
+        delay(2000)
+        navController.navigate(ROUT_REGISTER
+        )
+
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()

@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.mugash.mugasheats.navigation.ROUT_REGISTER
+import com.mugash.mugasheats.navigation.ROUT_START
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -35,7 +36,7 @@ fun SplashScreen(navController: NavHostController) {
     val coroutine = rememberCoroutineScope()
     coroutine.launch {
         delay(2000)
-        navController.navigate(ROUT_REGISTER)
+        navController.navigate(ROUT_START)
 
     }
 

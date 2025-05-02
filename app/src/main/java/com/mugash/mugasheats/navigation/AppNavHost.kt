@@ -15,16 +15,20 @@ import com.mugash.mugasheats.ui.screens.auth.LoginScreen
 import com.mugash.mugasheats.ui.screens.auth.RegisterScreen
 import com.mugash.mugasheats.ui.screens.contact.ContactScreen
 import com.mugash.mugasheats.ui.screens.home.HomeScreen
+import com.mugash.mugasheats.ui.screens.item.RestaurantMenuScreen
+import com.mugash.mugasheats.ui.screens.more.MoreScreen
+import com.mugash.mugasheats.ui.screens.recipe.RecipeScreen
 import com.mugash.mugasheats.ui.screens.splash.SplashScreen
 import com.mugash.mugasheats.ui.screens.start.StartScreen
 import com.mugash.mugasheats.viewmodel.AuthViewModel
+import com.mugash.sokomart.ui.screens.dashboard.DashboardScreen
 
 
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = ROUT_HOME
+    startDestination: String = ROUT_SPLASH
 
 
 ) {
@@ -52,6 +56,18 @@ fun AppNavHost(
         }
         composable(ROUT_DASHBOARD) {
             DashboardScreen(navController)
+        }
+        composable(ROUT_MORE) {
+            MoreScreen(navController)
+        }
+        composable(ROUT_ABOUT) {
+            AboutScreen(navController)
+        }
+        composable(ROUT_RESTAURANTMENU) {
+            RestaurantMenuScreen(navController)
+        }
+        composable(ROUT_RECIPE) {
+            RecipeScreen(navController)
         }
 
 

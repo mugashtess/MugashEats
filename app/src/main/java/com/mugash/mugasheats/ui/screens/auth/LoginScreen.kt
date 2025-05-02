@@ -28,7 +28,7 @@ import androidx.navigation.NavController
 import com.mugash.mugasheats.R
 import com.mugash.mugasheats.navigation.ROUT_REGISTER
 import com.mugash.mugasheats.navigation.ROUT_DASHBOARD
-import com.mugash.mugasheats.navigation.ROUT_ITEM
+import com.mugash.mugasheats.navigation.ROUT_MORE
 import com.mugash.mugasheats.viewmodel.AuthViewModel
 
 @Composable
@@ -49,7 +49,7 @@ fun LoginScreen(
                 Toast.makeText(context, "Invalid Credentials", Toast.LENGTH_SHORT).show()
             } else {
                 if (user.role == "admin") {
-                    navController.navigate(ROUT_ITEM)
+                    navController.navigate(ROUT_MORE)
                 } else {
                     navController.navigate(ROUT_DASHBOARD)
                 }
@@ -165,7 +165,7 @@ fun LoginScreen(
 
         // Register Navigation
         TextButton(onClick = { navController.navigate(ROUT_REGISTER) }) {
-            Text("Don't have an account? Register", color = Color(0xFF0072FF))
+            Text("Don't have an account? Register", color = Color(0xFFD84315))
         }
     }
 }
