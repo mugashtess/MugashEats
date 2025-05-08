@@ -9,6 +9,7 @@ const val ROUT_START = "start"
 const val ROUT_SPLASH= "splash"
 const val ROUT_MORE= "more"
 const val ROUT_RESTAURANTMENU= "restaurantmenu"
+const val ROUT_RECIPE_LIST= "recipelist"
 const val ROUT_RECIPE= "recipe"
 
 

@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.mugash.mugasheats.R
+import com.mugash.mugasheats.navigation.ROUT_RECIPE_LIST
+import com.mugash.mugasheats.ui.screens.home.ROUT_RESTAURANTMENU
 
 // Define your color here or import from your theme
 val newPurple = Color(0xFF9C27B0) // Example purple color
@@ -62,7 +64,7 @@ fun RestaurantMenuScreen(navController: NavController) {
                 navigationIconContentColor = Color.White
             ),
             navigationIcon = {
-                IconButton(onClick = {}) {
+                IconButton(onClick = { navController.navigate(ROUT_RECIPE_LIST)}) {
                     Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
                 }
             },

@@ -17,6 +17,7 @@ import com.mugash.mugasheats.ui.screens.contact.ContactScreen
 import com.mugash.mugasheats.ui.screens.home.HomeScreen
 import com.mugash.mugasheats.ui.screens.item.RestaurantMenuScreen
 import com.mugash.mugasheats.ui.screens.more.MoreScreen
+import com.mugash.mugasheats.ui.screens.recipe.RecipeListScreen
 import com.mugash.mugasheats.ui.screens.recipe.RecipeScreen
 import com.mugash.mugasheats.ui.screens.splash.SplashScreen
 import com.mugash.mugasheats.ui.screens.start.StartScreen
@@ -72,6 +73,15 @@ fun AppNavHost(
 
 
 
+
+
+        composable(ROUT_RECIPE_LIST) {
+            RecipeListScreen(
+                recipes = listOf(), // 👈 Pass an actual list, even if empty for now
+                onAddClick = { navController.navigate(ROUT_RECIPE) },
+                onRecipeClick = { /* Handle click, maybe navigate to details */ }
+            )
+        }
 
 
 
