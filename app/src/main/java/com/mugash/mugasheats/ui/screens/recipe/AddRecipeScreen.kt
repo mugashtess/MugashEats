@@ -9,38 +9,44 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.mugash.mugasheats.R
-import com.mugash.mugasheats.navigation.ROUT_ADD_PRODUCT
-import com.mugash.mugasheats.navigation.ROUT_PRODUCT_LIST
-import com.mugash.mugasheats.viewmodel.ProductViewModel
+import com.mugash.mugasheats.navigation.ROUT_ADD_RECIPE
+import com.mugash.mugasheats.navigation.ROUT_HOME
+import com.mugash.mugasheats.navigation.ROUT_MORE
+import com.mugash.mugasheats.navigation.ROUT_RECIPE_LIST
+import com.mugash.mugasheats.viewmodel.RecipeViewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) {
+fun AddRecipeScreen(navController: NavController, viewModel: RecipeViewModel) {
     var name by remember { mutableStateOf("") }
-    var price by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
+    var ingredients by remember { mutableStateOf("") }
+    var steps by remember { mutableStateOf("") }
+    var prepTime by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     var showMenu by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
 
-    // Image Picker Launcher
     val imagePicker = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             imageUri = it
@@ -51,7 +57,7 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Add Product", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
+                title = { Text("Add Recipe", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(Color.LightGray),
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
@@ -67,16 +73,16 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
                         onDismissRequest = { showMenu = false }
                     ) {
                         DropdownMenuItem(
-                            text = { Text("Product List") },
+                            text = { Text("Recipe List") },
                             onClick = {
-                                navController.navigate(ROUT_PRODUCT_LIST)
+                                navController.navigate(ROUT_RECIPE_LIST)
                                 showMenu = false
                             }
                         )
                         DropdownMenuItem(
-                            text = { Text("Add Product") },
+                            text = { Text("Add Recipe") },
                             onClick = {
-                                navController.navigate(ROUT_ADD_PRODUCT)
+                                navController.navigate(ROUT_ADD_RECIPE)
                                 showMenu = false
                             }
                         )
@@ -86,7 +92,7 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
         },
         bottomBar = {
             BottomNavigationBar(navController)
-        },
+                    },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -95,39 +101,48 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Product Name
+                // Recipe Name
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Product Name") },
-                    leadingIcon = { Icon(painter = painterResource(R.drawable.baseline_dynamic_feed_24), contentDescription = "Name") },
+                    label = { Text("Recipe Name") },
                     modifier = Modifier.fillMaxWidth()
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                // Product Price
+                // Ingredients
                 OutlinedTextField(
-                    value = price,
-                    onValueChange = { price = it },
-                    label = { Text("Product Price") },
-                    leadingIcon = { Icon(painter = painterResource(R.drawable.baseline_architecture_24), contentDescription = "Price") },
-                    modifier = Modifier.fillMaxWidth()
+                    value = ingredients,
+                    onValueChange = { ingredients = it },
+                    label = { Text("Ingredients") },
+                    leadingIcon = { Icon(Icons.Default.List, contentDescription = "Ingredients") },
+                    modifier = Modifier.fillMaxWidth(),
+                    maxLines = 4
                 )
-
-
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                // Phone Number
+                // Steps
                 OutlinedTextField(
-                    value = phone,
-                    onValueChange = { phone = it },
-                    label = { Text("Phone Number") },
-                    leadingIcon = { Icon(painter = painterResource(R.drawable.phone), contentDescription = "Price") },
-                    modifier = Modifier.fillMaxWidth()
+                    value = steps,
+                    onValueChange = { steps = it },
+                    label = { Text("Preparation Steps") },
+                    leadingIcon = { Icon(Icons.Default.Menu, contentDescription = "Steps") },
+                    modifier = Modifier.fillMaxWidth(),
+                    maxLines = 5
                 )
 
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // Preparation Time
+                OutlinedTextField(
+                    value = prepTime,
+                    onValueChange = { prepTime = it },
+                    label = { Text("Preparation Time (e.g., 30 mins)") },
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -135,7 +150,7 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
                 Box(
                     modifier = Modifier
                         .size(200.dp)
-                        .background(Color.LightGray, shape = RoundedCornerShape(10.dp))
+                        .background(Color.LightGray, shape = RoundedCornerShape(16.dp))
                         .clickable { imagePicker.launch("image/*") },
                     contentAlignment = Alignment.Center
                 ) {
@@ -143,12 +158,15 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
                         Image(
                             painter = rememberAsyncImagePainter(model = imageUri),
                             contentDescription = "Selected Image",
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(8.dp)
+                                .clip(RoundedCornerShape(16.dp)),
                             contentScale = ContentScale.Crop
                         )
                     } else {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(painter = painterResource(R.drawable.image), contentDescription = "Pick Image")
+                            Icon(painter = painterResource(R.drawable.recipeicon), contentDescription = "Pick Image")
                             Text("Tap to pick image", color = Color.DarkGray)
                         }
                     }
@@ -156,52 +174,49 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                // Add Product Button
+                // Add Recipe Button
                 Button(
                     onClick = {
-                        val priceValue = price.toDoubleOrNull()
-                        if (priceValue != null) {
-                            imageUri?.toString()?.let { viewModel.addProduct(name, priceValue, phone,it) }
+                        if (name.isNotBlank() && ingredients.isNotBlank() && steps.isNotBlank() && prepTime.isNotBlank() && imageUri != null) {
+                            // You should call your viewModel.addRecipe() here (create it if doesn’t exist)
                             navController.popBackStack()
+                        } else {
+                            // Optionally show Snackbar
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(Color.LightGray)
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(Color(0xFF6F6A72))
                 ) {
-                    Text("Add Product", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                    Text("Add Recipe", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)
                 }
             }
         }
     )
-}
-
-// Bottom Navigation Bar Component
+    }
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     NavigationBar(
-        containerColor = Color(0xFF6F6A72),
-        contentColor = Color.White
+        containerColor = Color.White,
+        contentColor = Color.Black
     ) {
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_PRODUCT_LIST) },
-            icon = { Icon(Icons.Default.Home, contentDescription = "Product List") },
+            onClick = { navController.navigate(ROUT_HOME) },
+            icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
             label = { Text("Home") }
         )
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_ADD_PRODUCT) },
-            icon = { Icon(Icons.Default.AddCircle, contentDescription = "Add Product") },
-            label = { Text("Add") }
+            onClick = { navController.navigate(ROUT_RECIPE_LIST) },
+            icon = { Icon(Icons.Default.Menu, contentDescription = "Recipes") },
+            label = { Text("Recipes") }
         )
-
-
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_ADD_PRODUCT) },
-            icon = { Icon(painter = painterResource(R.drawable.profile), contentDescription = "") },
-            label = { Text("Profile") }
+            onClick = { navController.navigate(ROUT_MORE) },
+            icon = { Icon(Icons.Default.Person, contentDescription = "More") },
+            label = { Text("More") }
         )
     }
 }

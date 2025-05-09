@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.mugash.mugasheats.R
+import com.mugash.mugasheats.navigation.ROUT_ADD_RECIPE
 import com.mugash.mugasheats.navigation.ROUT_REGISTER
 import com.mugash.mugasheats.navigation.ROUT_DASHBOARD
 import com.mugash.mugasheats.navigation.ROUT_MORE
@@ -49,7 +50,7 @@ fun LoginScreen(
                 Toast.makeText(context, "Invalid Credentials", Toast.LENGTH_SHORT).show()
             } else {
                 if (user.role == "admin") {
-                    navController.navigate(ROUT_MORE)
+                    navController.navigate(ROUT_ADD_RECIPE)
                 } else {
                     navController.navigate(ROUT_DASHBOARD)
                 }

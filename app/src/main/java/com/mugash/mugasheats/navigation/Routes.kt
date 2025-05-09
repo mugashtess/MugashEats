@@ -9,8 +9,16 @@ const val ROUT_START = "start"
 const val ROUT_SPLASH= "splash"
 const val ROUT_MORE= "more"
 const val ROUT_RESTAURANTMENU= "restaurantmenu"
-const val ROUT_RECIPE_LIST= "recipelist"
 const val ROUT_RECIPE= "recipe"
+
+//Recipe
+
+const val ROUT_ADD_RECIPE = "add_recipe"
+const val ROUT_RECIPE_LIST= "recipelist"
+const val ROUT_EDIT_RECIPE = "edit_recipe/{recipeId}"
+
+// ✅ Helper function for navigation
+fun editRecipeRoute(recipeId: Int) = "edit_recipe/$recipeId"
 
 
 

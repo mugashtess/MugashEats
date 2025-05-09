@@ -72,4 +72,10 @@ class RecipeViewModel(application: Application) : AndroidViewModel(application) 
             e.printStackTrace()
         }
     }
+    fun updateRecipe(updatedRecipe: Recipe) = viewModelScope.launch {
+        repository.update(updatedRecipe)
+    }
+
+
+
 }

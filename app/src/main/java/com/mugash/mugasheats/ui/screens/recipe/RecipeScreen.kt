@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.mugash.mugasheats.R // make sure this matches your package
+import com.mugash.mugasheats.navigation.ROUT_ADD_RECIPE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -124,7 +125,7 @@ fun RecipeScreen(navController: NavController) {
                 time = "40 min",
                 imageRes = R.drawable.chicken_curry // ensure drawable chicken_curry exists
             ) {
-                navController.navigate("recipe_details/chicken_curry")
+                navController.navigate(ROUT_ADD_RECIPE)
             }
         }
     }
