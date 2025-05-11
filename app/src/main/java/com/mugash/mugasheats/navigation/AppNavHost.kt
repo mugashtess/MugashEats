@@ -1,5 +1,6 @@
 package com.mugash.mugasheats.navigation
 
+import RecipeListScreen
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
@@ -23,9 +24,8 @@ import com.mugash.mugasheats.ui.screens.item.RestaurantMenuScreen
 import com.mugash.mugasheats.ui.screens.more.MoreScreen
 import com.mugash.mugasheats.ui.screens.recipe.AddRecipeScreen
 import com.mugash.mugasheats.ui.screens.recipe.EditRecipeScreen
-
-import com.mugash.mugasheats.ui.screens.recipe.RecipeListScreen
 import com.mugash.mugasheats.ui.screens.recipe.RecipeScreen
+
 import com.mugash.mugasheats.ui.screens.splash.SplashScreen
 import com.mugash.mugasheats.ui.screens.start.StartScreen
 import com.mugash.mugasheats.viewmodel.AuthViewModel

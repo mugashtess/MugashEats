@@ -30,6 +30,7 @@ import com.mugash.mugasheats.navigation.ROUT_ADD_RECIPE
 import com.mugash.mugasheats.navigation.ROUT_REGISTER
 import com.mugash.mugasheats.navigation.ROUT_DASHBOARD
 import com.mugash.mugasheats.navigation.ROUT_MORE
+import com.mugash.mugasheats.navigation.ROUT_START
 import com.mugash.mugasheats.viewmodel.AuthViewModel
 
 @Composable
@@ -52,7 +53,7 @@ fun LoginScreen(
                 if (user.role == "admin") {
                     navController.navigate(ROUT_ADD_RECIPE)
                 } else {
-                    navController.navigate(ROUT_DASHBOARD)
+                    navController.navigate(ROUT_START)
                 }
             }
         }

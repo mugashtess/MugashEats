@@ -179,7 +179,7 @@ fun AddRecipeScreen(navController: NavController, viewModel: RecipeViewModel) {
                     onClick = {
                         if (name.isNotBlank() && ingredients.isNotBlank() && steps.isNotBlank() && prepTime.isNotBlank() && imageUri != null) {
                             // You should call your viewModel.addRecipe() here (create it if doesn’t exist)
-                            navController.popBackStack()
+                            navController.navigate(ROUT_RECIPE_LIST)
                         } else {
                             // Optionally show Snackbar
                         }

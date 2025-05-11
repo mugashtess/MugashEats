@@ -76,6 +76,7 @@ class RecipeViewModel(application: Application) : AndroidViewModel(application) 
         repository.update(updatedRecipe)
     }
 
+    fun deleteRecipe(recipe: com.mugash.mugasheats.model.Recipe) {}
 
 
 }

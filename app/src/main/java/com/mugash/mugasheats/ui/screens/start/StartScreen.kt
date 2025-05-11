@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.mugash.mugasheats.R
+import com.mugash.mugasheats.navigation.ROUT_ADD_RECIPE
+import com.mugash.mugasheats.navigation.ROUT_DASHBOARD
 import com.mugash.mugasheats.navigation.ROUT_HOME
 import com.mugash.mugasheats.navigation.ROUT_REGISTER
 import com.mugash.mugasheats.navigation.ROUT_SPLASH
@@ -36,7 +38,8 @@ fun StartScreen(navController: NavController) {
     val coroutine = rememberCoroutineScope()
     coroutine.launch {
         delay(2000)
-        navController.navigate(ROUT_REGISTER
+        navController.navigate(
+            ROUT_DASHBOARD
         )
 
     }
@@ -89,7 +92,7 @@ fun StartScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(30.dp))
 
         Button(
-            onClick = { navController.navigate(ROUT_HOME) },
+            onClick = { navController.navigate(ROUT_ADD_RECIPE) },
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFFF7043), // Vibrant orange

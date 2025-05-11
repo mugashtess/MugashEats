@@ -24,4 +24,5 @@ class RecipeRepository(private val dao: RecipeDao) {
     suspend fun getRecipeById(id: Int): Recipe? {
         return dao.getRecipeById(id)
     }
+
 }

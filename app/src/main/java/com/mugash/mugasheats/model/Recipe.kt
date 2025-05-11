@@ -13,7 +13,10 @@ data class Recipe(
     val ingredients: String,
     val steps: String,
     val time: String,
-    val imagePath: String
+    val name: String,
+    val imagePath: String,
+    val chefPhone: String  // <-- Add this line
+
 )
 
 
